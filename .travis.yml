@@ -21,4 +21,4 @@ before_script:
   - travis_retry composer update --no-interaction --no-suggest --prefer-source
   - curl -X GET "localhost:9200/_cluster/health?wait_for_status=yellow&timeout=50s"
 script:
-  - time php atrisan scout:import
+  - time php artisan scout:import
