@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\DefaultImportSourceFactory;
 use Illuminate\Support\ServiceProvider;
+use Matchish\ScoutElasticSearch\Searchable\ImportSourceFactory;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(ImportSourceFactory::class, function () {
+            return new DefaultImportSourceFactory();
+        });
     }
 
     /**
