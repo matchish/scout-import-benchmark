@@ -4,7 +4,7 @@ services:
   - mysql
 
 env:
-  - ELASTICSEARCH_HOST=localhost:9200 DB_DATABASE=my_database DB_USERNAME=travis DB_PASSWORD=""
+  - SCOUT_DRIVER=elastic SCOUT_ELASTIC_INDEXER=bulk SCOUT_ELASTIC_HOST=localhost:9200 DB_DATABASE=my_database DB_USERNAME=travis DB_PASSWORD=""
 
 php:
   - 7.3
@@ -20,5 +20,7 @@ before_script:
   - travis_retry composer self-update
   - travis_retry composer update --no-interaction --no-suggest --prefer-source
   - curl -X GET "localhost:9200/_cluster/health?wait_for_status=yellow&timeout=50s"
+  - php artisan make:index-configurator EmployeeIndexConfigurator
+  - php artisan elastic:create-index "App\EmployeeIndexConfigurator"
 script:
   - time php artisan scout:import
