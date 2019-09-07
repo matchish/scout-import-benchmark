@@ -20,7 +20,9 @@ before_script:
   - travis_retry composer self-update
   - travis_retry composer update --no-interaction --no-suggest --prefer-source
   - curl -X GET "localhost:9200/_cluster/health?wait_for_status=yellow&timeout=50s"
+  - php artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider"
+  - php artisan vendor:publish --provider="ScoutElastic\ScoutElasticServiceProvider"
   - php artisan make:index-configurator EmployeeIndexConfigurator
   - php artisan elastic:create-index "App\EmployeeIndexConfigurator"
 script:
-  - time php artisan scout:import
+  - time php artisan scout:import "App\Employee"
