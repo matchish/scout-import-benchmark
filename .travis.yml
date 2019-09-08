@@ -25,4 +25,4 @@ before_script:
   - php artisan make:index-configurator EmployeeIndexConfigurator
   - php artisan elastic:create-index "App\EmployeeIndexConfigurator"
 script:
-  - time php artisan scout:import "App\Employee"
+  - time php artisan debug

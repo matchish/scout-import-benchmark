@@ -16,3 +16,10 @@ use Illuminate\Foundation\Inspiring;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->describe('Display an inspiring quote');
+
+Artisan::command('debug', function () {
+    \DB::enableQueryLog();
+    \App\Employee::limit(3)->get()->searchable();
+    var_dump(\DB::getQueryLog());
+    var_dump(json_encode(\App\Employee::search('*')->raw()));
+})->describe('debug');
