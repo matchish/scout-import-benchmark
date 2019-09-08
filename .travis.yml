@@ -26,3 +26,6 @@ before_script:
   - php artisan elastic:create-index "App\EmployeeIndexConfigurator"
 script:
   - time php artisan debug
+  - curl -X GET "localhost:9200/employee/_doc/10001?pretty&pretty"
+
+
