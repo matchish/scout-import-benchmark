@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Foundation\Inspiring;
 
 /*
@@ -18,6 +19,9 @@ Artisan::command('inspire', function () {
 })->describe('Display an inspiring quote');
 
 Artisan::command('debug', function () {
+    \App\Employee::withoutSyncingToSearch(function () {
+        \App\Employee::where('emp_no', '>', 21730)->delete();
+    });
     \DB::enableQueryLog();
     Artisan::call('scout:import', [
         'model' => \App\Employee::class
