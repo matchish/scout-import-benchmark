@@ -19,7 +19,7 @@ Artisan::command('inspire', function () {
 
 Artisan::command('debug', function () {
     \DB::enableQueryLog();
-    \App\Employee::limit(3)->get()->searchable();
+    \App\Employee::limit(1000)->get()->searchable();
     var_dump(\DB::getQueryLog());
     var_dump(json_encode(\App\Employee::search('*')->raw()));
 })->describe('debug');
