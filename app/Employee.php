@@ -61,9 +61,9 @@ class Employee extends Model
     public function toSearchableArray()
     {
         return [
-            'salaries' => $this->salaries,
-            'titles' => $this->titles,
-            'departments' => $this->departments,
+            'salaries' => $this->salaries->toArray(),
+            'titles' => $this->titles->toArray(),
+            'departments' => $this->departments->toArray(),
         ];
     }
 }

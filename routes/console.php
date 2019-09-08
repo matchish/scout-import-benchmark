@@ -19,6 +19,9 @@ Artisan::command('inspire', function () {
 
 Artisan::command('debug', function () {
     \DB::enableQueryLog();
-    \App\Employee::limit(1000)->get()->searchable();
+    Artisan::call('scout:import', [
+        'model' => \App\Employee::class
+    ]);
     var_dump(\DB::getQueryLog());
+    var_dump(json_encode(\App\Employee::search('*')->take(2)->raw()));
 })->describe('debug');
